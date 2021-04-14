@@ -1,23 +1,29 @@
-import './App.css';
+import {ChakraProvider, CSSReset} from '@chakra-ui/react';
+import {css, Global} from '@emotion/react';
+import {Layout} from './components/common/Layout';
+import React from 'react';
+import {BrowserRouter as Router} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import {Routes} from './routes';
+import {theme} from './theme';
 
-export default App;
+const GlobalStyles = css`
+  .js-focus-visible :focus:not([data-focus-visible-added]) {
+    outline: none;
+    box-shadow: none;
+  }
+`;
+
+export const App = () => {
+    return (
+        <ChakraProvider theme={theme}>
+            <CSSReset/>
+            <Global styles={GlobalStyles}/>
+            <Router>
+                <Layout>
+                    <Routes/>
+                </Layout>
+            </Router>
+        </ChakraProvider>
+    );
+};
