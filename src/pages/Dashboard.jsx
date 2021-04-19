@@ -1,12 +1,11 @@
 import React from "react";
-import {
-  Main,
-} from "../styles";
+import {Main} from "../styles";
+import {ProfileCard} from "../components/ProfileCard";
 
 export const Dashboard = () => {
-  return (
-    <Main>
-     Dashboard
-    </Main>
-  );
+    return (
+        <Main>
+            <ProfileCard/>
+        </Main>
+    );
 }
