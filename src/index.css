@@ -1,0 +1,16 @@
+* {
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: "Noto Sans", sans-serif;
+    height: auto;
+}
+
+svg {
+    margin-right: 8px;
+    background-color: #ffff;
+}
+
+a.active {
+    color: #34affc;
+}
