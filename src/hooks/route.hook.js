@@ -1,8 +1,7 @@
 import React from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import {Dashboard} from '../pages/Dashboard'
-import {Login} from '../pages/Login'
-import {Registration} from '../pages/Registration'
+import {Auth} from '../pages/Auth'
 import {Admin} from '../pages/Admin'
 
 export const useRoutes = (isAuthenticated) => {
@@ -15,11 +14,8 @@ export const useRoutes = (isAuthenticated) => {
                 <Route path="/admin">
                     <Admin/>
                 </Route>
-                <Route path="/login">
-                    <Login/>
-                </Route>
-                <Route path="/registration">
-                    <Registration/>
+                <Route path="/auth">
+                    <Auth/>
                 </Route>
                 <Redirect to="/"/>
             </Switch>
@@ -28,16 +24,10 @@ export const useRoutes = (isAuthenticated) => {
 
     return (
         <Switch>
-            <Route path="/">
-                <Dashboard/>
+            <Route path="/auth">
+                <Auth/>
             </Route>
-            <Route path="/login">
-                <Login/>
-            </Route>
-            <Route path="/registration">
-                <Registration/>
-            </Route>
-            <Redirect to="/"/>
+            <Redirect to="/auth"/>
         </Switch>
     )
 }

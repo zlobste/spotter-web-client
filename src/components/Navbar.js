@@ -1,10 +1,10 @@
 import React from 'react'
 import {Container} from "@chakra-ui/react";
 
-export const Login = () => {
+export const Navbar = () => {
     return (
         <Container>
-            Login
+            Navbar
         </Container>
     );
 }
