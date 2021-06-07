@@ -2,8 +2,8 @@
 
 ```
 # install deps
-$ npm run i
+$ yarn install
 
 # run app
-$ npm run start
+$ yarn run start
 ```
