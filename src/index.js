@@ -1,17 +1,24 @@
-import React from "react";
-import ReactDom from "react-dom";
-import { Provider } from "react-redux";
-import { applyMiddleware, compose, createStore } from "redux";
-import App from "./App";
-import "./index.css";
+import { ColorModeScript } from '@chakra-ui/react';
+import React, { StrictMode } from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import * as serviceWorker from './serviceWorker';
 
-const store = createStore(
-  compose(applyMiddleware())
+ReactDOM.render(
+  <StrictMode>
+    <ColorModeScript />
+    <App />
+  </StrictMode>,
+  document.getElementById('root')
 );
 
-ReactDom.render(
-  <Provider store={store}>
-      <App />
-  </Provider>,
-  document.querySelector("#root")
-);
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://cra.link/PWA
+serviceWorker.unregister();
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
