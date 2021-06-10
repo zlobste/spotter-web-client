@@ -4,18 +4,26 @@ import { Auth } from '../pages/Auth';
 import { Admin } from '../pages/Admin';
 import { Driver } from '../pages/Driver';
 
-export const useRoutes = (isAuthenticated) => {
+
+const RoleTypeManager = 1;
+
+
+export const useRoutes = (isAuthenticated, role) => {
   if (isAuthenticated) {
     return (
       <Switch>
-        <Route path='/admin'>
-          <Admin />
-        </Route>
+        {
+          role === RoleTypeManager ?
+            <Route path='/admin'>
+              <Admin />
+            </Route>
+            :
+            <Route path='/'>
+              <Driver />
+            </Route>
+        }
         <Route path='/auth'>
           <Auth />
-        </Route>
-        <Route path='/driver'>
-          <Driver />
         </Route>
       </Switch>
     );
@@ -23,10 +31,10 @@ export const useRoutes = (isAuthenticated) => {
 
   return (
     <Switch>
-      <Route path='/auth'>
+      <Route path='/'>
         <Auth />
       </Route>
-      <Redirect to='/auth' />
+      <Redirect to='/' />
     </Switch>
   );
 };

@@ -60,7 +60,7 @@ export const Auth = () => {
           password: form.password,
         },
       });
-      auth.login(data.message.token, data.message.user_id);
+      auth.login(data.message.token, data.message.user_id, data.message.role);
     } catch (e) {
       console.error(e);
     }
