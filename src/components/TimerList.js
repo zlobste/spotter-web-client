@@ -3,7 +3,7 @@ import { AuthContext } from '../context/AuthContext';
 import { useHttp } from '../hooks/http.hook';
 import { Grid, GridItem } from '@chakra-ui/react';
 
-export const TimerList = () => {
+export const TimerList = ({state}) => {
   const [timers, setTimers] = useState([]);
   const { userId, token } = useContext(AuthContext);
   const { request } = useHttp();
@@ -24,7 +24,7 @@ export const TimerList = () => {
 
   useEffect(() => {
     userTimers();
-  }, [userTimers]);
+  }, [userTimers, state]);
 
 
   return (
@@ -34,9 +34,9 @@ export const TimerList = () => {
       gap={4}
     >
       {
-        timers.map(x => {
+        timers.map((x, k) => {
           return (
-            <GridItem rowSpan={1} colSpan={5} bg='tomato'>
+            <GridItem rowSpan={1} colSpan={5} bg='tomato' key={k}>
               {x.start_time}
               {x.end_time}
             </GridItem>
