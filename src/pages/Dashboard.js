@@ -1,5 +1,6 @@
 import React from 'react';
 import { DriverList } from '../components/DriverList';
+import { Container } from '@chakra-ui/react';
 
 const DRIVERS = [
   {
@@ -48,6 +49,8 @@ const DRIVERS = [
 
 export const Dashboard = () => {
   return (
-    <DriverList drivers={DRIVERS} />
+    <Container maxW='xl' centerContent>
+      <DriverList drivers={DRIVERS} />
+    </Container>
   );
 };

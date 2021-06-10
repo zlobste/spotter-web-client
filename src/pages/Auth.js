@@ -18,7 +18,7 @@ import { AuthContext } from '../context/AuthContext';
 
 export const Auth = () => {
   const auth = useContext(AuthContext);
-  const { request} = useHttp();
+  const { request } = useHttp();
   const [form, setForm] = useState({
     email: '', password: '', name: '', surname: '',
   });
@@ -43,13 +43,13 @@ export const Auth = () => {
           name: form.name,
           surname: form.surname,
           email: form.email,
-          password: form.password
-        }
+          password: form.password,
+        },
       });
     } catch (e) {
       console.error(e);
     }
-    switchForm()
+    switchForm();
   };
 
   const loginHandler = async () => {
@@ -57,10 +57,10 @@ export const Auth = () => {
       const data = await request('auth/login', 'POST', {
         data: {
           email: form.email,
-          password: form.password
-        }
+          password: form.password,
+        },
       });
-      auth.login(data.message.token, data.message.userId);
+      auth.login(data.message.token, data.message.user_id);
     } catch (e) {
       console.error(e);
     }
