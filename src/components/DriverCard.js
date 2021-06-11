@@ -1,18 +1,74 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Heading,
-  Avatar,
   Box,
   Center,
-  Image,
-  Flex,
   Text,
   Stack,
   Button,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { AuthContext } from '../context/AuthContext';
+import { useHttp } from '../hooks/http.hook';
 
-export const DriverCard = ({driver}) => {
+export const DriverCard = ({ driver }) => {
+  console.log(driver);
+  const { token } = useContext(AuthContext);
+  const { request } = useHttp();
+  const [blocked, setBlocked] = useState(!!driver.blocked);
+  const [role, setRole] = useState(driver.role);
+
+  const blockUser = async (userId) => {
+    if (blocked) {
+      return;
+    }
+    try {
+      const data = await request(`users/block/${userId}`, 'POST', null, {
+        Authorization: `Bearer ${token}`,
+      });
+      console.log(data);
+      if (data.message != null) {
+        setBlocked(true);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const unblockUser = async (userId) => {
+    if (!blocked) {
+      return;
+    }
+    try {
+      const data = await request(`users/unblock/${userId}`, 'POST', null, {
+        Authorization: `Bearer ${token}`,
+      });
+      console.log(data);
+      if (data.message != null) {
+        setBlocked(false);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const setManager = async (userId) => {
+    if (blocked) {
+      return;
+    }
+    try {
+      const data = await request(`users/set_manager/${userId}`, 'POST', null, {
+        Authorization: `Bearer ${token}`,
+      });
+      console.log(data);
+      if (data.message) {
+        setRole(1);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <Center py={6}>
       <Box
@@ -22,26 +78,6 @@ export const DriverCard = ({driver}) => {
         boxShadow={'2xl'}
         rounded={'md'}
         overflow={'hidden'}>
-        <Image
-          h={'120px'}
-          w={'full'}
-          src={
-            'https://images.unsplash.com/photo-1612865547334-09cb8cb455da?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'
-          }
-          objectFit={'cover'}
-        />
-        <Flex justify={'center'} mt={-12}>
-          <Avatar
-            size={'xl'}
-            src={
-              'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
-            }
-            alt={'Author'}
-            css={{
-              border: '2px solid white',
-            }}
-          />
-        </Flex>
 
         <Box p={6}>
           <Stack spacing={0} align={'center'} mb={5}>
@@ -50,34 +86,63 @@ export const DriverCard = ({driver}) => {
             </Heading>
             <Text color={'gray.500'}>{driver.email}</Text>
           </Stack>
-
-          <Stack direction={'row'} justify={'center'} spacing={6}>
-            <Stack spacing={0} align={'center'}>
-              <Text fontWeight={600}>{driver.rating}</Text>
-              <Text fontSize={'sm'} color={'gray.500'}>
-                Rating
-              </Text>
-            </Stack>
-            <Stack spacing={0} align={'center'}>
-              <Text fontWeight={600}>{driver.alcohol_rate}</Text>
-              <Text fontSize={'sm'} color={'gray.500'}>
-                Alcohol rate
-              </Text>
-            </Stack>
+          <Stack spacing={0} align={'center'}>
+            <Text fontWeight={600}>{role}</Text>
+            <Text fontSize={'sm'} color={'gray.500'}>
+              Role
+            </Text>
           </Stack>
 
-          <Button
-            w={'full'}
-            mt={8}
-            bg={useColorModeValue('#151f21', 'gray.900')}
-            color={'white'}
-            rounded={'md'}
-            _hover={{
-              transform: 'translateY(-2px)',
-              boxShadow: 'lg',
-            }}>
-            Block
-          </Button>
+          {
+            driver.blocked ?
+              <Button
+                w={'full'}
+                mt={8}
+                bg={'#C53030'}
+                color={'white'}
+                rounded={'md'}
+                onClick={() => unblockUser(driver.id)}
+                _hover={{
+                  transform: 'translateY(-2px)',
+                  boxShadow: 'lg',
+                }}>
+                Unblock
+              </Button>
+              :
+              <>
+                <Button
+                  w={'full'}
+                  mt={8}
+                  bg={'#4A5568'}
+                  color={'white'}
+                  rounded={'md'}
+                  onClick={() => blockUser(driver.id)}
+                  _hover={{
+                    transform: 'translateY(-2px)',
+                    boxShadow: 'lg',
+                  }}>
+                  Block
+                </Button>
+                {
+                  role !== 1 ?
+                    <Button
+                      w={'full'}
+                      mt={2}
+                      bg={'#38A169'}
+                      color={'white'}
+                      rounded={'md'}
+                      onClick={() => setManager(driver.id)}
+                      _hover={{
+                        transform: 'translateY(-2px)',
+                        boxShadow: 'lg',
+                      }}>
+                      Set manager
+                    </Button>
+                    :
+                    ''
+                }
+              </>
+          }
         </Box>
       </Box>
     </Center>

@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { Button, Container } from '@chakra-ui/react';
+import { Box, Button, Container } from '@chakra-ui/react';
 import { useHttp } from '../hooks/http.hook';
 import { AuthContext } from '../context/AuthContext';
 import { useStopwatch } from 'react-timer-hook';
@@ -28,6 +28,10 @@ export const Timer = ({ updateState }) => {
       if (data.message) {
         reset();
         start();
+        const pt = await request(`timers/pending/${userId}`, 'GET', null, {
+          Authorization: `Bearer ${token}`,
+        });
+        setTimerId(pt.message.id)
       }
     } catch (e) {
       console.error(e);
@@ -67,7 +71,7 @@ export const Timer = ({ updateState }) => {
     } catch (e) {
       console.error(e);
     }
-  }, [token, userId, request, timerId]);
+  }, [token, userId, request]);
 
   useEffect(() => {
     pendingTimer();
@@ -76,9 +80,11 @@ export const Timer = ({ updateState }) => {
   console.log(timerId);
   return (
     <Container>
-      <Button onClick={startTimer}>Start timer</Button>
-      <Button onClick={stopTimer}>Stop timer</Button>
-      {hours}:{minutes}:{seconds}
+      <Box fontSize={'5em'}>
+      {hours < 10 ? `0${hours}` : hours }:{minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+      </Box>
+      <Button onClick={startTimer} bg={'#2C5282'} color={'#F7FAFC'} mr={'0.5em'}>Start timer</Button>
+      <Button onClick={stopTimer}   bg={'#E53E3E'} color={'#F7FAFC'}  mr={'0.5em'}>Stop timer</Button>
       <ProofList timerId={timerId} />
     </Container>
   );

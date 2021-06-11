@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useHttp } from '../hooks/http.hook';
-import { Grid, GridItem } from '@chakra-ui/react';
+import { Box, Grid, GridItem } from '@chakra-ui/react';
 import { ProofForm } from './ProofForm';
 
 export const ProofList = ({ timerId }) => {
@@ -28,29 +28,38 @@ export const ProofList = ({ timerId }) => {
   }, [timerProofs]);
 
   const updateList = () => {
-    timerProofs()
-  }
+    timerProofs();
+  };
 
   return (
     <>
-      <ProofForm timerId={timerId} updateList={updateList}/>
-      <Grid
-        templateRows={`repeat(${proofs.length}, 1fr)`}
-        templateColumns='repeat(5, 1fr)'
-        gap={4}
+      <ProofForm timerId={timerId} updateList={updateList} />
+      <Box
+        overflowY={'scroll'}
+        h={'6em'}
+        mt={'3em'}
       >
         {
           proofs.map((x, k) => {
             return (
-              <GridItem rowSpan={1} colSpan={5} bg='tomato' key={k}>
-                {x.time}
-                {x.percentage}
-                {x.confirmed}
-              </GridItem>
+              <Box key={k} bg={'#2F855A'} color={'#F7FAFC'} mb={'0.5em'} borderRadius={'5px'}>
+                <Grid
+                  templateRows='repeat(2, 1fr)'
+                  templateColumns='repeat(1, 1fr)'
+                >
+                  <GridItem rowSpan={1} colSpan={1}>
+                    time: {new Date(x.time).toDateString()} {new Date(x.time).toLocaleTimeString()}
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1}>
+                    percentage: {x.percentage} confirmed: {String(x.confirmed)}
+                  </GridItem>
+                </Grid>
+              </Box>
             );
           })
         }
-      </Grid>
+      </Box>
     </>
-  );
+  )
+    ;
 };

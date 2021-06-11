@@ -48,7 +48,9 @@ export const ProofForm = ({ timerId, updateList }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>Proof</Button>
+      <Button
+        bg={'#2F855A'} color={'#F7FAFC'}
+        onClick={onOpen}>Proof</Button>
       <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}

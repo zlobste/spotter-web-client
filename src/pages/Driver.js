@@ -12,11 +12,11 @@ export const Driver = () => {
   }
 
   return (
-    <Grid templateColumns='repeat(2, 5fr)' gap={6}>
-      <Box w='100%' h='10' bg='blue.500'>
+    <Grid templateColumns='repeat(2, 5fr)' gap={6} mb={'15em'}>
+      <Box w='25em' h='10'>
         <Timer updateState={updateState}/>
       </Box>
-      <Box w='100%' h='10' bg='blue.500'>
+      <Box w='20em'  h='10'>
         <TimerList state={state}/>
       </Box>
     </Grid>
