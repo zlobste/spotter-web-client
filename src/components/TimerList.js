@@ -28,7 +28,7 @@ export const TimerList = ({ state }) => {
 
 
   return (
-
+    timers.length !== 0 ?
     <Box
       overflowY={'scroll'}
       h={'18.2em'}
@@ -53,5 +53,7 @@ export const TimerList = ({ state }) => {
         })
       }
     </Box>
+      :
+     <Box mt={'4em'}>You do not have any timers!</Box>
   );
 };

@@ -12,19 +12,15 @@ export const useRoutes = (isAuthenticated, role) => {
   if (isAuthenticated) {
     return (
       <Switch>
-        {
-          role === RoleTypeManager ?
-            <Route path='/admin'>
+        <Route path='/'>
+          {
+            role === RoleTypeManager ?
               <Admin />
-            </Route>
-            :
-            <Route path='/'>
+              :
               <Driver />
-            </Route>
-        }
-        <Route path='/auth'>
-          <Auth />
+          }
         </Route>
+        <Redirect to='/' />
       </Switch>
     );
   }

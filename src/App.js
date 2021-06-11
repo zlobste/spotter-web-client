@@ -29,10 +29,16 @@ function App() {
       <ChakraProvider theme={theme}>
         <Box textAlign='center' fontSize='xl'>
           <Grid minH='100vh' p={3}>
-            <ColorModeSwitcher justifySelf='flex-end' />
+            <Grid templateColumns='repeat(2, 1fr)' gap={6} mt={'1em'}>
+              <Box w='100%' h='10'>
+                <ColorModeSwitcher justifySelf='flex-end' />
+              </Box>
+              <Box w='100%' h='10'>
+                {isAuthenticated &&  <Button onClick={logout}>Log out</Button>}
+              </Box>
+            </Grid>
             <Router>
               <Container maxW='xl' centerContent>
-                <Button onClick={logout}>Log out</Button>
                 {routes}
               </Container>
               {isAuthenticated && <Footer />}

@@ -36,7 +36,7 @@ export const ProofList = ({ timerId }) => {
       <ProofForm timerId={timerId} updateList={updateList} />
       <Box
         overflowY={'scroll'}
-        h={'6em'}
+        h={'5.7em'}
         mt={'3em'}
       >
         {

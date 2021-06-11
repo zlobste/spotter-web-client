@@ -16,6 +16,7 @@ export const Timer = ({ updateState }) => {
     hours,
     start,
     pause,
+    isRunning,
     reset,
   } = useStopwatch({});
 
@@ -85,7 +86,7 @@ export const Timer = ({ updateState }) => {
       </Box>
       <Button onClick={startTimer} bg={'#2C5282'} color={'#F7FAFC'} mr={'0.5em'}>Start timer</Button>
       <Button onClick={stopTimer}   bg={'#E53E3E'} color={'#F7FAFC'}  mr={'0.5em'}>Stop timer</Button>
-      <ProofList timerId={timerId} />
+      {isRunning ? <ProofList timerId={timerId} /> : ''}
     </Container>
   );
 };
