@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "signIn": {
+      "info": "Sign in to your account"
+    },
+    "signUp": {
+      "info": "Create your account"
+    },
+    "logOut": "Log out"
+  }
+}

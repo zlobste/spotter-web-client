@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { useHttp } from '../hooks/http.hook';
 import { AuthContext } from '../context/AuthContext';
+import { useTranslation } from 'react-i18next'
 
 export const Auth = () => {
   const auth = useContext(AuthContext);
@@ -22,7 +23,8 @@ export const Auth = () => {
   const [form, setForm] = useState({
     email: '', password: '', name: '', surname: '',
   });
-  const [formType, setFormType] = useState({ login: true });
+  const [formType, setFormType] = useState({ login: true })
+  const { t } = useTranslation()
 
   const changeHandler = event => {
     setForm({ ...form, [event.target.name]: event.target.value });
@@ -75,7 +77,7 @@ export const Auth = () => {
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'}>
-            {formType.login ? 'Sign in to your account' : 'Create your account'}
+            {formType.login ? t('auth.signIn.info') : t('auth.signUp.info')}
           </Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
             to enjoy all of our cool <Link color={'blue.400'}>features</Link> ✌️
