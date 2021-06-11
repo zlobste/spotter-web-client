@@ -3,11 +3,13 @@ import { AuthContext } from '../context/AuthContext';
 import { useHttp } from '../hooks/http.hook';
 import { Box, Grid, GridItem } from '@chakra-ui/react';
 import { ProofForm } from './ProofForm';
+import { useTranslation } from 'react-i18next';
 
 export const ProofList = ({ timerId }) => {
   const [proofs, setProofs] = useState([]);
   const { token } = useContext(AuthContext);
   const { request } = useHttp();
+  const { t } = useTranslation()
 
   const timerProofs = useCallback(async () => {
     try {
@@ -48,10 +50,10 @@ export const ProofList = ({ timerId }) => {
                   templateColumns='repeat(1, 1fr)'
                 >
                   <GridItem rowSpan={1} colSpan={1}>
-                    time: {new Date(x.time).toDateString()} {new Date(x.time).toLocaleTimeString()}
+                    {t('proof.time')}: {new Date(x.time).toDateString()} {new Date(x.time).toLocaleTimeString()}
                   </GridItem>
                   <GridItem rowSpan={1} colSpan={1}>
-                    percentage: {x.percentage} confirmed: {String(x.confirmed)}
+                    {t('proof.percentage')}: {x.percentage}  {t('proof.confirmed')}: {String(x.confirmed)}
                   </GridItem>
                 </Grid>
               </Box>

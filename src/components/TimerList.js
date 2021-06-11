@@ -2,11 +2,13 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useHttp } from '../hooks/http.hook';
 import { Box, Grid, GridItem } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
 
 export const TimerList = ({ state }) => {
   const [timers, setTimers] = useState([]);
   const { userId, token } = useContext(AuthContext);
   const { request } = useHttp();
+  const { t } = useTranslation()
 
   const userTimers = useCallback(async () => {
     try {
@@ -42,10 +44,10 @@ export const TimerList = ({ state }) => {
                 templateColumns='repeat(1, 1fr)'
               >
                 <GridItem rowSpan={1} colSpan={1}>
-                  start time: {new Date(x.start_time).toDateString()} {new Date(x.start_time).toLocaleTimeString()}
+                  {t('timer.startTime')}: {new Date(x.start_time).toDateString()} {new Date(x.start_time).toLocaleTimeString()}
                 </GridItem>
                 <GridItem colSpan={1}>
-                  finish time: {new Date(x.end_time).toDateString()} {new Date(x.end_time).toLocaleTimeString()}
+                  {t('timer.endTime')}: {new Date(x.end_time).toDateString()} {new Date(x.end_time).toLocaleTimeString()}
                 </GridItem>
               </Grid>
             </Box>
@@ -54,6 +56,6 @@ export const TimerList = ({ state }) => {
       }
     </Box>
       :
-     <Box mt={'4em'}>You do not have any timers!</Box>
+     <Box mt={'4em'}>{t('timer.doNot')}</Box>
   );
 };

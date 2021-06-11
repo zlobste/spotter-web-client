@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { AuthContext } from '../context/AuthContext';
 import { useHttp } from '../hooks/http.hook';
+import { useTranslation } from 'react-i18next';
 
 export const DriverCard = ({ driver }) => {
   console.log(driver);
@@ -17,6 +18,7 @@ export const DriverCard = ({ driver }) => {
   const { request } = useHttp();
   const [blocked, setBlocked] = useState(!!driver.blocked);
   const [role, setRole] = useState(driver.role);
+  const { t } = useTranslation()
 
   const blockUser = async (userId) => {
     if (blocked) {
@@ -89,7 +91,7 @@ export const DriverCard = ({ driver }) => {
           <Stack spacing={0} align={'center'}>
             <Text fontWeight={600}>{role}</Text>
             <Text fontSize={'sm'} color={'gray.500'}>
-              Role
+              {t('user.role')}
             </Text>
           </Stack>
 
@@ -106,7 +108,7 @@ export const DriverCard = ({ driver }) => {
                   transform: 'translateY(-2px)',
                   boxShadow: 'lg',
                 }}>
-                Unblock
+                {t('user.unblock')}
               </Button>
               :
               <>
@@ -121,7 +123,7 @@ export const DriverCard = ({ driver }) => {
                     transform: 'translateY(-2px)',
                     boxShadow: 'lg',
                   }}>
-                  Block
+                  {t('user.block')}
                 </Button>
                 {
                   role !== 1 ?
@@ -136,7 +138,7 @@ export const DriverCard = ({ driver }) => {
                         transform: 'translateY(-2px)',
                         boxShadow: 'lg',
                       }}>
-                      Set manager
+                      {t('user.set_manager')}
                     </Button>
                     :
                     ''

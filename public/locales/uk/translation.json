@@ -1,11 +1,53 @@
 {
   "auth": {
     "signIn": {
-      "info": "Sign in to your account"
+      "label": "Sign in",
+      "info": "Sign in to your account",
+      "remember": "Remember me"
     },
     "signUp": {
+      "label": "Sign up",
       "info": "Create your account"
     },
-    "logOut": "Log out"
+    "logOut": "Log out",
+    "doNot": "Do not have account?",
+    "already": "Already have an account?"
+  },
+  "user": {
+    "role": "Role",
+    "unblock": "Unblock",
+    "block": "Block",
+    "set_manager": "Set manager",
+    "name": "Name",
+    "surname": "Surname",
+    "email": "Email",
+    "password": "Password"
+  },
+  "info": {
+    "enjoy": "to enjoy all of our cool features"
+  },
+  "timer": {
+    "start": "Start",
+    "stop": "Stop",
+    "doNot": "You do not have any timers!",
+    "startTime": "Start time",
+    "endTime": "End time"
+  },
+  "proof": {
+    "info": "Proof",
+    "confirmed": "Confirmed",
+    "percentage": "Percentege",
+    "time": "time",
+    "make": "Make a proof"
+  },
+  "cancel": "Cancel",
+  "footer": {
+    "company": "Company",
+    "about": "About us",
+    "blog": "Blog",
+    "support": "Support",
+    "help": "Help Center",
+    "terms": "Terms of Service",
+    "stay": "Stay up to date"
   }
 }

@@ -14,8 +14,10 @@ import { BiMailSend } from 'react-icons/bi';
 import { Logo } from './Logo';
 import { SocialButton } from './SocialButton';
 import { ListHeader } from './ListHeader';
+import { useTranslation } from 'react-i18next';
 
 export const Footer = () => {
+  const { t } = useTranslation()
   return (
     <Box
       bg={useColorModeValue('gray.50', 'gray.900')}
@@ -41,23 +43,17 @@ export const Footer = () => {
             </Stack>
           </Stack>
           <Stack align={'flex-start'} fontSize={'lg'}>
-            <ListHeader>Company</ListHeader>
-            <Link href={'#'} >About us</Link>
-            <Link href={'#'}>Blog</Link>
-            <Link href={'#'}>Contact us</Link>
-            <Link href={'#'}>Pricing</Link>
-            <Link href={'#'}>Testimonials</Link>
+            <ListHeader>{t('footer.company')}</ListHeader>
+            <Link href={'#'} >{t('footer.about')}</Link>
+            <Link href={'#'}>{t('footer.blog')}</Link>
           </Stack>
           <Stack align={'flex-start'} fontSize={'lg'}>
-            <ListHeader fontWeight={'bold'}>Support</ListHeader>
-            <Link href={'#'}>Help Center</Link>
-            <Link href={'#'}>Terms of Service</Link>
-            <Link href={'#'}>Legal</Link>
-            <Link href={'#'}>Privacy Policy</Link>
-            <Link href={'#'}>Satus</Link>
+            <ListHeader fontWeight={'bold'}>{t('footer.support')}</ListHeader>
+            <Link href={'#'}>{t('footer.help')}</Link>
+            <Link href={'#'}>{t('footer.terms')}</Link>
           </Stack>
           <Stack align={'flex-start'}>
-            <ListHeader>Stay up to date</ListHeader>
+            <ListHeader>{t('footer.stay')}</ListHeader>
             <Stack direction={'row'}>
               <Input
                 placeholder={'Your email address'}

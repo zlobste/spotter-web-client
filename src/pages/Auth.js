@@ -80,7 +80,7 @@ export const Auth = () => {
             {formType.login ? t('auth.signIn.info') : t('auth.signUp.info')}
           </Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
-            to enjoy all of our cool <Link color={'blue.400'}>features</Link> ✌️
+            {t('info.enjoy')} ✌️
           </Text>
         </Stack>
         <Box
@@ -93,7 +93,7 @@ export const Auth = () => {
               formType.login ? '' :
                 <>
                   <FormControl id='name'>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel> {t('user.name')}</FormLabel>
                     <Input
                       name='name'
                       type='name'
@@ -101,7 +101,7 @@ export const Auth = () => {
                     />
                   </FormControl>
                   <FormControl id='surname'>
-                    <FormLabel>Surname</FormLabel>
+                    <FormLabel>{t('user.surname')}</FormLabel>
                     <Input
                       name='surname'
                       type='surname'
@@ -111,7 +111,7 @@ export const Auth = () => {
                 </>
             }
             <FormControl id='email'>
-              <FormLabel>Email address</FormLabel>
+              <FormLabel>{t('user.email')}</FormLabel>
               <Input
                 name='email'
                 type='email'
@@ -119,7 +119,7 @@ export const Auth = () => {
               />
             </FormControl>
             <FormControl id='password'>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>{t('user.password')}</FormLabel>
               <Input
                 name='password'
                 type='password'
@@ -131,9 +131,9 @@ export const Auth = () => {
                 direction={{ base: 'column', sm: 'row' }}
                 align={'start'}
                 justify={'space-between'}>
-                <Checkbox>{formType.login ? 'Remember me' : 'Sign in'}</Checkbox>
+                <Checkbox>{formType.login ? t('auth.signIn.remember') :  t('auth.signIn.label')}</Checkbox>
                 <Link fontSize={'md'} color={'blue.400'} onClick={switchForm}>
-                  {formType.login ? 'Do not have account?' : 'Already have an account?'}
+                  {formType.login ? t('auth.doNot') : t('auth.already')}
                 </Link>
               </Stack>
               <Button
@@ -144,7 +144,7 @@ export const Auth = () => {
                 }}
                 onClick={handleRequest}
               >
-                {formType.login ? 'Sign in' : 'Sign up'}
+                {formType.login ? t('auth.signIn.label') :  t('auth.signUp.label') }
               </Button>
             </Stack>
           </Stack>

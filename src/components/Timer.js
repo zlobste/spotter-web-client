@@ -4,7 +4,7 @@ import { useHttp } from '../hooks/http.hook';
 import { AuthContext } from '../context/AuthContext';
 import { useStopwatch } from 'react-timer-hook';
 import { ProofList } from './ProofList';
-
+import { useTranslation } from 'react-i18next'
 
 export const Timer = ({ updateState }) => {
   const { userId, token } = useContext(AuthContext);
@@ -19,6 +19,8 @@ export const Timer = ({ updateState }) => {
     isRunning,
     reset,
   } = useStopwatch({});
+  const { t } = useTranslation()
+
 
   const startTimer = async () => {
     try {
@@ -84,8 +86,8 @@ export const Timer = ({ updateState }) => {
       <Box fontSize={'5em'}>
       {hours < 10 ? `0${hours}` : hours }:{minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds}
       </Box>
-      <Button onClick={startTimer} bg={'#2C5282'} color={'#F7FAFC'} mr={'0.5em'}>Start timer</Button>
-      <Button onClick={stopTimer}   bg={'#E53E3E'} color={'#F7FAFC'}  mr={'0.5em'}>Stop timer</Button>
+      <Button onClick={startTimer} bg={'#2C5282'} color={'#F7FAFC'} mr={'0.5em'}>{t('timer.start')}</Button>
+      <Button onClick={stopTimer}   bg={'#E53E3E'} color={'#F7FAFC'}  mr={'0.5em'}>{t('timer.stop')}</Button>
       {isRunning ? <ProofList timerId={timerId} /> : ''}
     </Container>
   );

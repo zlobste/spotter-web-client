@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { useHttp } from '../hooks/http.hook';
 import { AuthContext } from '../context/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 export const ProofForm = ({ timerId, updateList }) => {
   const { token } = useContext(AuthContext);
@@ -19,6 +20,8 @@ export const ProofForm = ({ timerId, updateList }) => {
   const [form, setForm] = useState({
     percentage: 0,
   });
+  const { t } = useTranslation()
+
 
   const changeHandler = event => {
     setForm({ ...form, [event.target.name]: event.target.value });
@@ -50,7 +53,7 @@ export const ProofForm = ({ timerId, updateList }) => {
     <>
       <Button
         bg={'#2F855A'} color={'#F7FAFC'}
-        onClick={onOpen}>Proof</Button>
+        onClick={onOpen}>{t('proof.info')}</Button>
       <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
@@ -59,20 +62,20 @@ export const ProofForm = ({ timerId, updateList }) => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Make a proof</ModalHeader>
+          <ModalHeader>{t("proof.make")}</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
-              <FormLabel>Percentage</FormLabel>
+              <FormLabel>{t("proof.percentage")}</FormLabel>
               <Input name='percentage' ref={initialRef} placeholder='percentage' onChange={changeHandler} />
             </FormControl>
           </ModalBody>
 
           <ModalFooter>
             <Button colorScheme='blue' mr={3} onClick={() => makeProof(onClose)}>
-              Proof
+              {t("proof.info")}
             </Button>
-            <Button onClick={onClose}>Cancel</Button>
+            <Button onClick={onClose}>{t("cancel")}</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
